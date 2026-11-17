@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ma carte évolutive selon le profil · Kopain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="kopain.css">
+<script src="kopain.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#FFFFFF}a:hover{color:#9DB8FF}
+</style>
+</helmet>
+<div style="width: 430px; height: 884px; box-sizing: border-box; padding: 20px; background: #23262E; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 160px; top: 31px; width: 110px; height: 30px; border-radius: 15px; background: #000000; z-index: 5"></div>
+<div style="width: 390px; height: 844px; border-radius: 44px; box-sizing: border-box; background: #0B0D12; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="flex: 1; padding: 50px 16px 0; display: flex; flex-direction: column; gap: 8px; overflow: hidden">
+    <header style="display: flex; align-items: center; gap: 8px">
+      <h1 style="flex: 1; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -.01em">Ma carte</h1>
+      <a href="partage.html" aria-label="Partager ma carte" style="width: 44px; height: 44px; border-radius: 22px; background: #F5B83D; color: #0B0D12; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 4v11M7 9l5-5 5 5M5 14v5h14v-5"></path></svg></a>
+      <a href="kop.html" aria-label="Mon solde : 1 250 kops" style="min-height: 44px; padding: 0 12px 0 8px; border-radius: 22px; background: #151821; border: 1px solid #2A2F3C; text-decoration: none; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums"><span aria-hidden="true" style="width: 24px; height: 24px; border-radius: 50%; background: #F5B83D; color: #0B0D12; font-size: 13px; font-weight: 900; display: flex; align-items: center; justify-content: center">K</span>1 250</a>
+    </header>
+
+    <div role="group" aria-label="Profil" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: #151821">
+      <sc-for list="{{ profiles }}" as="p" hint-placeholder-count="3">
+        <button onClick="{{ p.pick }}" aria-pressed="{{ p.on }}" style="min-height: 44px; border-radius: 8px; border: none; background: {{ p.bg }}; color: {{ p.color }}; font: 800 13px 'Archivo', sans-serif; cursor: pointer">{{ p.label }}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ hasSport }}" hint-placeholder-val="{{ true }}">
+      <div role="group" aria-label="Sport de la carte" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{ sports }}" as="s" hint-placeholder-count="4">
+          <button onClick="{{ s.pick }}" aria-pressed="{{ s.on }}" style="min-height: 44px; border-radius: 22px; border: 1px solid {{ s.border }}; background: {{ s.bg }}; color: {{ s.color }}; font: 700 13px 'Archivo', sans-serif; cursor: pointer">{{ s.label }}</button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ noSport }}" hint-placeholder-val="{{ false }}">
+      <a href="club.html" style="min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid #3A4152; text-decoration: none; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: space-between">Club de cœur : Batignolles BC<span style="color: #A3A9B8; font-weight: 500">tous sports</span></a>
+    </sc-if>
+
+    <article aria-label="{{ cardLabel }}" style="position: relative; width: 214px; height: 300px; align-self: center; flex-shrink: 0">
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: {{ outer }}; clip-path: {{ clip }}"></div>
+      <div style="position: absolute; inset: 4px; background: {{ inner }}; clip-path: {{ clip }}; color: {{ ink }}; display: flex; flex-direction: column; align-items: center; padding: 28px 20px 0; box-sizing: border-box">
+        <div style="align-self: stretch; display: flex; justify-content: space-between; align-items: flex-start">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 2px">
+            <span style="font-size: 52px; font-weight: 900; font-stretch: 75%; line-height: .9; letter-spacing: -.02em; color: {{ ratingColor }}; font-variant-numeric: tabular-nums">{{ rating }}</span>
+            <span style="font-size: 14px; font-weight: 900; letter-spacing: .06em">{{ pos }}</span>
+            <span style="margin-top: 2px; min-width: 30px; height: 26px; padding: 0 5px; border-radius: 13px; background: {{ crestBg }}; border: 2px solid {{ ink }}; color: #0B0D12; font-size: 9px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-sizing: border-box; white-space: nowrap">{{ crest }}</span>
+          </div>
+          <svg aria-hidden="true" width="92" height="92" viewBox="0 0 64 64"><circle cx="32" cy="22" r="13" fill="{{ ink }}"></circle><path d="M6 64c2-17 12-25 26-25s24 8 26 25z" fill="{{ ink }}"></path></svg>
+        </div>
+        <span style="align-self: stretch; margin-top: 6px; padding: 4px 0; border-top: 2px solid {{ ink }}; border-bottom: 2px solid {{ ink }}; font-size: 18px; font-weight: 900; letter-spacing: .03em; text-align: center">NICOLAS P.</span>
+        <div style="align-self: stretch; margin-top: 6px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; row-gap: 1px; font-size: 14px; font-variant-numeric: tabular-nums">
+          <sc-for list="{{ stats }}" as="st" hint-placeholder-count="6">
+            <span style="display: flex; gap: 7px"><strong style="font-weight: 900">{{ st.v }}</strong>{{ st.l }}</span>
+          </sc-for>
+        </div>
+        <span style="margin-top: 7px; font-size: 9px; font-weight: 900; letter-spacing: .08em">{{ tierTag }}</span>
+      </div>
+      <sc-if value="{{ plus }}" hint-placeholder-val="{{ true }}">
+        <span style="position: absolute; right: -20px; top: 34px; padding: 4px 8px; border-radius: 6px; background: #0B0D12; border: 1.5px solid #F5B83D; color: #F5B83D; font-size: 11px; font-weight: 900; letter-spacing: .06em; transform: rotate(8deg)">KOPAIN+</span>
+      </sc-if>
+    </article>
+
+    <div role="tablist" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid #2A2F3C">
+      <button role="tab" aria-selected="{{ isEvo }}" onClick="{{ showEvo }}" style="min-height: 44px; border: none; border-bottom: 2px solid {{ evoLine }}; background: transparent; color: {{ evoColor }}; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Évolution</button>
+      <button role="tab" aria-selected="{{ isTro }}" onClick="{{ showTro }}" style="min-height: 44px; border: none; border-bottom: 2px solid {{ troLine }}; background: transparent; color: {{ troColor }}; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Trophées · 3 sur 12</button>
+    </div>
+
+    <div style="min-height: 172px; display: flex; flex-direction: column; gap: 8px">
+      <sc-if value="{{ isEvo }}" hint-placeholder-val="{{ true }}">
+        <div role="group" aria-label="Aperçu des paliers de la carte" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px">
+          <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="5">
+            <button onClick="{{ t.pick }}" aria-pressed="{{ t.on }}" style="min-height: 44px; border-radius: 8px; border: 2px solid {{ t.border }}; background: #151821; color: #FFFFFF; font: 700 12px 'Archivo', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer"><span aria-hidden="true" style="width: 22px; height: 5px; border-radius: 3px; background: {{ t.swatch }}"></span>{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <span style="font-size: 13px; font-weight: 600; line-height: 1.3">{{ nextText }}</span>
+        <div role="img" aria-label="{{ progressLabel }}" style="height: 8px; border-radius: 4px; background: #2A2F3C; overflow: hidden; flex-shrink: 0"><span style="display: block; height: 8px; width: {{ progress }}; background: #F5B83D"></span></div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 11px; line-height: 1.3; color: #A3A9B8">
+          <sc-for list="{{ drivers }}" as="d" hint-placeholder-count="3">
+            <span><strong style="display: block; color: #FFFFFF">{{ d.t }}</strong>{{ d.x }}</span>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isTro }}" hint-placeholder-val="{{ false }}">
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+          <sc-for list="{{ trophies }}" as="tr" hint-placeholder-count="4">
+            <div style="min-height: 84px; padding: 8px 4px; border-radius: 10px; background: {{ tr.bg }}; border: 1px {{ tr.line }}; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 11px; font-weight: 700; line-height: 1.2; color: {{ tr.color }}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ tr.stroke }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 20h8"></path></svg>{{ tr.label }}</div>
+          </sc-for>
+        </div>
+        <span style="font-size: 12px; color: #A3A9B8">Trophées dorés : gagnés. En pointillés : le prochain à décrocher.</span>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+          <button onClick="{{ togglePlus }}" aria-pressed="{{ plus }}" style="min-height: 44px; padding: 0 10px; border-radius: 10px; border: 1px solid {{ plusBorder }}; background: #151821; color: #FFFFFF; font: 700 13px 'Archivo', sans-serif; display: flex; align-items: center; justify-content: space-between; cursor: pointer">Tag Kopain+<span style="font-weight: 800; color: {{ plusColor }}">{{ plusLabel }}</span></button>
+          <a href="resume.html" style="min-height: 44px; border-radius: 10px; border: 1px solid #3A4152; text-decoration: none; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center">Mon week-end</a>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <nav aria-label="Navigation principale" style="height: 84px; flex-shrink: 0; background: #0B0D12; border-top: 1px solid #2A2F3C; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; box-sizing: border-box">
+    <a href="accueil.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M12 5v14M7.5 10v4M16.5 10v4"></path></svg>Matchs</a>
+    <a href="jouer.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5M17 5.5a3 3 0 0 1 0 6M18.5 15c1.6.8 2.6 2.4 3 5"></path></svg>Jouer</a>
+    <a href="creer.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><span style="width: 30px; height: 26px; border-radius: 7px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>Créer</a>
+    <a href="kop.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M4 10v4h3l7 4V6L7 10z"></path><path d="M17.5 9.5a4 4 0 0 1 0 5"></path></svg>Kop</a>
+    <a href="ma-carte.html" aria-current="page" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #FFFFFF; border-top: 2px solid {{accent}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Moi</a>
+  </nav>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2558E6","options":["#2558E6","#D91F26","#0B7A53","#7C3AED"]},"$preview":{"width":430,"height":884}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { profile: 'licencie', sport: 'basket', tier: 'bronze', tab: 'evo', plus: true };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#2558E6';
+    const s = this.state;
+    const sportData = {
+      basket: { label: 'Basket', pos: 'MEN', crest: 'BBC', crestBg: '#3DDC97', tech: 'tir, passe, dribble, défense', stats: [['TIR', 82], ['DÉF', 74], ['PAS', 86], ['PRÉ', 98], ['DRI', 80], ['FAIR', 95]] },
+      foot: { label: 'Foot', pos: 'MIL', crest: 'FCE', crestBg: '#D9A6FF', tech: 'vitesse, tir, passe, défense', stats: [['VIT', 78], ['DÉF', 72], ['TIR', 75], ['PRÉ', 92], ['PAS', 84], ['FAIR', 95]] },
+      padel: { label: 'Padel', pos: 'REV', crest: 'P500', crestBg: '#FFFFFF', tech: 'smash, volée, lob, placement', stats: [['SMA', 76], ['PLA', 83], ['VOL', 81], ['PRÉ', 96], ['LOB', 79], ['FAIR', 95]] },
+      course: { label: 'Course', pos: '10K', crest: '52:10', crestBg: '#7FB2FF', tech: 'calculées sur tes courses', stats: [['VIT', 74], ['RÉG', 88], ['END', 82], ['PRÉ', 90], ['DÉN', 69], ['FAIR', 95]] }
+    };
+    const profileData = {
+      licencie: {
+        label: 'Licencié',
+        clip: 'polygon(50% 0, 100% 7%, 100% 80%, 50% 100%, 0 80%, 0 7%)',
+        drivers: [{ t: 'Coéquipiers', x: sportData[s.sport].tech }, { t: 'Présence', x: 'note PRÉ et paliers' }, { t: 'Public', x: 'cartes spéciales' }],
+        tags: { semaine: 'JOUEUR DE LA SEMAINE', legende: 'LÉGENDE DU CLUB' },
+        next: {
+          bronze: 'Carte de départ. Argent dans 2 matchs : 5 matchs officiels et 5 votes de coéquipiers.',
+          argent: 'Or à la note 75 : encore 6 points, avec 15 matchs et 90 % de présence.',
+          or: 'Carte spéciale : sois élu joueur du match par le public ou gagne un derby.',
+          semaine: 'Carte spéciale gagnée : élu joueur du match. Elle reste affichée 7 jours.',
+          legende: 'Carte ultime : 3 saisons dans le même club et 100 matchs joués.'
+        },
+        trophies: ['Premier match', 'Derby gagné', '5 présences d’affilée', 'Joueur du match']
+      },
+      loisir: {
+        label: 'Loisir',
+        clip: 'polygon(14% 0, 86% 0, 100% 9%, 100% 91%, 86% 100%, 14% 100%, 0 91%, 0 9%)',
+        drivers: [{ t: 'Partenaires', x: 'niveau et fair-play' }, { t: 'Fiabilité', x: 'note PRÉ et paliers' }, { t: 'Parties', x: 'jouées et organisées' }],
+        tags: { semaine: 'PARTENAIRE DE LA SEMAINE', legende: 'PILIER DU QUARTIER' },
+        next: {
+          bronze: 'Carte de départ. Argent dans 2 parties : 5 parties jouées sans désistement.',
+          argent: 'Or : 20 parties, 2 sports pratiqués et 3 parties organisées par toi.',
+          or: 'Carte spéciale : sois le partenaire le mieux noté de la semaine dans ton quartier.',
+          semaine: 'Carte spéciale gagnée : partenaire le mieux noté. Elle reste affichée 7 jours.',
+          legende: 'Carte ultime : 100 parties jouées et 25 organisées dans ton quartier.'
+        },
+        trophies: ['Première partie', 'Sauveur de match', '3 sports essayés', 'Organisateur']
+      },
+      supporter: {
+        label: 'Supporter',
+        clip: 'polygon(0 0, 100% 0, 100% 44%, 95% 50%, 100% 56%, 100% 100%, 0 100%, 0 56%, 5% 50%, 0 44%)',
+        drivers: [{ t: 'Tribune', x: 'matchs suivis sur place' }, { t: 'Pronos', x: 'réussite en kops' }, { t: 'Kop', x: 'chambrages et bravos' }],
+        tags: { semaine: 'SUPPORTER DE LA SEMAINE', legende: 'ULTRA DU CLUB' },
+        next: {
+          bronze: 'Carte de départ. Argent dans 2 matchs : 5 matchs suivis sur place.',
+          argent: 'Or : 15 matchs suivis, 20 pronos gagnés et 1 déplacement à l’extérieur.',
+          or: 'Carte spéciale : sois le meilleur pronostiqueur ou le chambreur le plus applaudi.',
+          semaine: 'Carte spéciale gagnée : meilleur pronostiqueur. Elle reste affichée 7 jours.',
+          legende: 'Carte ultime : 3 saisons de fidélité et 100 matchs suivis.'
+        },
+        trophies: ['Premier match vu', 'Prono parfait', '5 matchs d’affilée', 'Roi du chambrage']
+      }
+    };
+    const tierData = {
+      bronze: { label: 'Bronze', rating: 58, outer: '#6E4520', inner: '#C98A4B', ink: '#0B0D12', ratingColor: '#0B0D12', tag: '2026-27 · BRONZE', progress: 60 },
+      argent: { label: 'Argent', rating: 69, outer: '#7C8494', inner: '#D5D9E2', ink: '#0B0D12', ratingColor: '#0B0D12', tag: '2026-27 · ARGENT', progress: 55 },
+      or: { label: 'Or', rating: 84, outer: '#8A6516', inner: '#F5B83D', ink: '#0B0D12', ratingColor: '#0B0D12', tag: '2026-27 · OR', progress: 80 },
+      semaine: { label: 'Semaine', rating: 88, outer: '#F5B83D', inner: '#14204F', ink: '#FFFFFF', ratingColor: '#F5B83D', tag: '', progress: 100 },
+      legende: { label: 'Légende', rating: 93, outer: '#F5B83D', inner: '#0B0D12', ink: '#F5B83D', ratingColor: '#FFFFFF', tag: '', progress: 100 }
+    };
+    const sp = sportData[s.sport];
+    const pr = profileData[s.profile];
+    const tr = tierData[s.tier];
+    const delta = tr.rating - 84;
+    let base = sp.stats;
+    let pos = sp.pos;
+    let crest = sp.crest;
+    let crestBg = sp.crestBg;
+    if (s.profile === 'loisir') {
+      base = [['NIV', 72], ['ORG', 77], ['PRÉ', 98], ['POLY', 70], ['PAR', 81], ['FAIR', 95]];
+      pos = 'LOISIR';
+      crest = sp.label.toUpperCase();
+      crestBg = '#FFFFFF';
+    }
+    if (s.profile === 'supporter') {
+      base = [['FID', 88], ['AMB', 84], ['PRO', 62], ['DÉP', 55], ['CHA', 79], ['FAIR', 95]];
+      pos = 'KOP';
+      crest = 'BBC';
+      crestBg = '#3DDC97';
+    }
+    const stats = base.map((p) => ({ l: p[0], v: Math.max(35, Math.min(99, p[1] + delta)) }));
+    const profiles = ['licencie', 'loisir', 'supporter'].map((id) => ({
+      label: profileData[id].label,
+      on: s.profile === id,
+      bg: s.profile === id ? '#FFFFFF' : 'transparent',
+      color: s.profile === id ? '#0B0D12' : '#A3A9B8',
+      pick: () => this.setState({ profile: id })
+    }));
+    const sports = ['basket', 'foot', 'padel', 'course'].map((id) => ({
+      label: sportData[id].label,
+      on: s.sport === id,
+      bg: s.sport === id ? '#FFFFFF' : 'transparent',
+      color: s.sport === id ? '#0B0D12' : '#FFFFFF',
+      border: s.sport === id ? '#FFFFFF' : '#3A4152',
+      pick: () => this.setState({ sport: id })
+    }));
+    const tiers = ['bronze', 'argent', 'or', 'semaine', 'legende'].map((id) => ({
+      label: tierData[id].label,
+      on: s.tier === id,
+      border: s.tier === id ? '#FFFFFF' : '#2A2F3C',
+      swatch: id === 'semaine' ? '#3D5BD9' : (id === 'legende' ? '#F5B83D' : tierData[id].inner),
+      pick: () => this.setState({ tier: id })
+    }));
+    const trophies = pr.trophies.map((label, i) => ({
+      label: label,
+      bg: i < 3 ? '#151821' : 'transparent',
+      line: i < 3 ? 'solid #F5B83D' : 'dashed #3A4152',
+      color: i < 3 ? '#FFFFFF' : '#A3A9B8',
+      stroke: i < 3 ? '#F5B83D' : '#A3A9B8'
+    }));
+    const isEvo = s.tab === 'evo';
+    const hasSport = s.profile !== 'supporter';
+    return {
+      accent: accent,
+      profiles: profiles,
+      sports: sports,
+      hasSport: hasSport,
+      noSport: !hasSport,
+      tiers: tiers,
+      stats: stats,
+      trophies: trophies,
+      drivers: pr.drivers,
+      clip: pr.clip,
+      rating: tr.rating,
+      pos: pos,
+      crest: crest,
+      crestBg: crestBg,
+      outer: tr.outer,
+      inner: tr.inner,
+      ink: tr.ink,
+      ratingColor: tr.ratingColor,
+      tierTag: tr.tag || pr.tags[s.tier],
+      nextText: pr.next[s.tier],
+      progress: tr.progress + '%',
+      progressLabel: 'Progression vers le palier suivant : ' + tr.progress + ' %',
+      cardLabel: 'Carte ' + pr.label + ' de Nicolas P., palier ' + tr.label + ', note ' + tr.rating,
+      isEvo: isEvo,
+      isTro: !isEvo,
+      evoLine: isEvo ? accent : 'transparent',
+      troLine: isEvo ? 'transparent' : accent,
+      evoColor: isEvo ? '#FFFFFF' : '#A3A9B8',
+      troColor: isEvo ? '#A3A9B8' : '#FFFFFF',
+      showEvo: () => this.setState({ tab: 'evo' }),
+      showTro: () => this.setState({ tab: 'tro' }),
+      plus: s.plus,
+      plusLabel: s.plus ? 'Affiché' : 'Masqué',
+      plusColor: s.plus ? '#F5B83D' : '#A3A9B8',
+      plusBorder: s.plus ? '#F5B83D' : '#2A2F3C',
+      togglePlus: () => this.setState({ plus: !s.plus })
+    };
+  }
+}
+</script>
+</body>
+</html>

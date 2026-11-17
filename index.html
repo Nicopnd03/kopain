@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kopain · le sport amateur, traité comme du pro</title>
+<meta name="description" content="Concept d'application mobile pour le sport amateur : prototype interactif, étude de marché et modèle économique.">
+<style>
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url(app/fonts/archivo-latin-wdth-normal.woff2) format('woff2');
+}
+:root {
+  --bg: #0B0D12;
+  --panel: #151821;
+  --line: #2A2F3C;
+  --text: #FFFFFF;
+  --muted: #A3A9B8;
+  --gold: #F5B83D;
+  --blue: #2558E6;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Archivo', system-ui, sans-serif;
+  line-height: 1.5;
+}
+a { color: inherit; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+header.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 72px;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand span { font-size: 20px; font-weight: 900; font-stretch: 125%; letter-spacing: .02em; }
+.brand b { color: var(--gold); font-weight: 900; }
+.top nav { display: flex; gap: 20px; font-size: 14px; font-weight: 700; }
+.top nav a { text-decoration: none; color: var(--muted); min-height: 44px; display: flex; align-items: center; }
+.top nav a:hover { color: var(--text); }
+
+.hero { padding: 56px 0 32px; }
+.eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin: 0 0 16px; }
+.hero h1 {
+  margin: 0; max-width: 820px;
+  font-size: clamp(40px, 7vw, 76px); font-weight: 900; line-height: 1; letter-spacing: -.03em;
+}
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p.lead { max-width: 640px; margin: 20px 0 0; font-size: 19px; color: var(--muted); }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn {
+  min-height: 52px; padding: 0 22px; border-radius: 12px;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 16px; font-weight: 800; text-decoration: none;
+}
+.btn.primary { background: var(--gold); color: var(--bg); }
+.btn.primary:hover { background: #FFC95C; }
+.btn.ghost { border: 1px solid #3A4152; color: var(--text); }
+.btn.ghost:hover { border-color: var(--text); }
+.btn:focus-visible, .top nav a:focus-visible, .screen:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.shot { margin: 40px 0 0; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); }
+.shot img { display: block; width: 100%; height: auto; }
+
+section { padding: 64px 0 0; }
+h2 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 40px); font-weight: 900; letter-spacing: -.02em; line-height: 1.1; }
+.sub { margin: 0 0 28px; color: var(--muted); font-size: 17px; max-width: 640px; }
+
+.verbs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.verb { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.verb strong { display: block; font-size: 24px; font-weight: 900; }
+.verb span { color: var(--muted); font-size: 15px; }
+.verb .k { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+
+.screens { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px 16px; }
+.screen { text-decoration: none; display: flex; flex-direction: column; gap: 8px; border-radius: 16px; }
+.screen img { width: 100%; height: auto; display: block; transition: transform .15s ease; }
+.screen:hover img { transform: translateY(-4px); }
+.screen b { font-size: 14px; font-weight: 800; }
+.screen small { font-size: 13px; color: var(--muted); line-height: 1.35; }
+
+.model { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.tile { border-top: 2px solid var(--gold); padding: 16px 0 0; }
+.tile b { display: block; font-size: 18px; font-weight: 900; }
+.tile .price { display: block; font-size: 26px; font-weight: 900; font-stretch: 75%; margin: 6px 0; }
+.tile span { color: var(--muted); font-size: 15px; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.stat b { display: block; font-size: 40px; font-weight: 900; font-stretch: 75%; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 14px; }
+
+.method { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.method div { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.method h3 { margin: 0 0 8px; font-size: 18px; font-weight: 900; }
+.method p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.top nav a { white-space: nowrap; }
+@media (max-width: 560px) {
+  .top nav a:not(:last-child) { display: none; }
+}
+
+footer { margin-top: 80px; padding: 28px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html" aria-label="Kopain, accueil">
+      <svg aria-hidden="true" width="36" height="36" viewBox="0 0 64 64"><path d="M32 3l25 8v21c0 14-10 24-25 29C17 56 7 46 7 32V11z" fill="#2558E6"></path><rect x="20" y="18" width="8" height="29" rx="2" fill="#FFFFFF"></rect><path d="M42 21L30 32.5 42 46" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="47" cy="15" r="5" fill="#F5B83D"></circle></svg>
+      <span><b>KOP</b>AIN</span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#ecrans">Écrans</a>
+      <a href="#modele">Modèle</a>
+      <a href="docs/etude-de-cas.html">Étude de cas</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <p class="eyebrow">Concept d'application mobile · étude de cas</p>
+      <h1>Le sport amateur, traité comme du <em>pro</em>.</h1>
+      <p class="lead">Kopain montre les matchs amateurs autour de toi, trouve le joueur qui manque à ta partie et fait vivre la rivalité entre clubs avec une carte joueur à collectionner et des paris en monnaie fictive.</p>
+      <div class="ctas">
+        <a class="btn primary" href="app/bienvenue.html">Ouvrir le prototype interactif</a>
+        <a class="btn ghost" href="docs/etude-de-cas.html">Lire l'étude de cas</a>
+      </div>
+      <figure class="shot"><img src="captures/apercu.png" width="2414" height="1004" alt="Cinq écrans de Kopain : bienvenue, aujourd'hui, fiche match, carte joueur, défi reçu"></figure>
+    </div>
+
+    <section aria-labelledby="t-verbes">
+      <h2 id="t-verbes">Trois usages, une seule app</h2>
+      <p class="sub">Les outils existants parlent à l'intérieur du club ou à un seul sport. Kopain parle à l'extérieur, tous sports confondus.</p>
+      <div class="verbs">
+        <div class="verb"><span class="k">Voir</span><strong>Ce qui se joue près de toi</strong><span>Matchs, tournois et initiations sur une carte, avec les scores en direct.</span></div>
+        <div class="verb"><span class="k">Jouer</span><strong>Le joueur qui manque</strong><span>Une annonce en trois gestes, envoyée aux joueurs du bon niveau autour de toi.</span></div>
+        <div class="verb"><span class="k">Supporter</span><strong>Ton club, ton kop</strong><span>Défis entre amis, chambrage prédéfini, paris en kops, vote du joueur du match.</span></div>
+      </div>
+    </section>
+
+    <section id="ecrans" aria-labelledby="t-ecrans">
+      <h2 id="t-ecrans">14 écrans à parcourir</h2>
+      <p class="sub">Chaque écran est cliquable : paris, défis, votes, cartes et navigation fonctionnent dans le navigateur.</p>
+      <div class="screens">
+        <a class="screen" href="app/bienvenue.html"><img src="captures/bienvenue.png" width="860" height="1768" loading="lazy" alt=""><b>Bienvenue</b><small>Logo, promesse, cartes en éventail</small></a>
+        <a class="screen" href="app/profils.html"><img src="captures/profils.png" width="860" height="1768" loading="lazy" alt=""><b>Trois profils</b><small>Licencié, loisir, supporter</small></a>
+        <a class="screen" href="app/equipe.html"><img src="captures/equipe.png" width="860" height="1768" loading="lazy" alt=""><b>Ton équipe</b><small>Un lien pour tout le vestiaire</small></a>
+        <a class="screen" href="app/accueil.html"><img src="captures/accueil.png" width="860" height="1768" loading="lazy" alt=""><b>Aujourd'hui</b><small>Défi, scores en direct, carte</small></a>
+        <a class="screen" href="app/match.html"><img src="captures/match-pari.png" width="860" height="1768" loading="lazy" alt=""><b>Fiche match</b><small>Paris, défi, chambrage</small></a>
+        <a class="screen" href="app/jouer.html"><img src="captures/jouer.png" width="860" height="1768" loading="lazy" alt=""><b>Jouer</b><small>Joueur manquant, partenaires</small></a>
+        <a class="screen" href="app/creer.html"><img src="captures/creer.png" width="860" height="1768" loading="lazy" alt=""><b>Créer</b><small>Annonce en trois étapes</small></a>
+        <a class="screen" href="app/kop.html"><img src="captures/kop.png" width="860" height="1768" loading="lazy" alt=""><b>Le Kop</b><small>Résultats, chambrages, classements</small></a>
+        <a class="screen" href="app/club.html"><img src="captures/club.png" width="860" height="1768" loading="lazy" alt=""><b>Carte club</b><small>Actualités, administration</small></a>
+        <a class="screen" href="app/ma-carte.html"><img src="captures/ma-carte-or.png" width="860" height="1768" loading="lazy" alt=""><b>Ma carte</b><small>Du bronze aux cartes spéciales</small></a>
+        <a class="screen" href="app/partage.html"><img src="captures/partage-perf.png" width="860" height="1768" loading="lazy" alt=""><b>Partage</b><small>Story résultat, perf, chambrage</small></a>
+        <a class="screen" href="app/defi.html"><img src="captures/defi.png" width="860" height="1768" loading="lazy" alt=""><b>Défi reçu</b><small>Ce que voit l'ami invité</small></a>
+        <a class="screen" href="app/vote.html"><img src="captures/vote-resultat.png" width="860" height="1768" loading="lazy" alt=""><b>Vote du public</b><small>Sans compte, par QR code</small></a>
+        <a class="screen" href="app/resume.html"><img src="captures/resume.png" width="860" height="1768" loading="lazy" alt=""><b>Résumé du week-end</b><small>Le rendez-vous du dimanche</small></a>
+      </div>
+    </section>
+
+    <section id="modele" aria-labelledby="t-modele">
+      <h2 id="t-modele">Un marché de masse, un modèle sobre</h2>
+      <p class="sub">L'app reste gratuite : voir, jouer et publier remplissent la carte. Les revenus viennent des joueurs assidus, des clubs structurés et des commerces locaux.</p>
+      <div class="model">
+        <div class="tile"><b>Kopain+</b><span class="price">4,99 € / mois</span><span>Alertes prioritaires, filtres par niveau, statistiques, tag sur la carte.</span></div>
+        <div class="tile"><b>Club Pro</b><span class="price">190 € / an</span><span>Mise en avant, recrutement, audience, espaces sponsors à revendre.</span></div>
+        <div class="tile"><b>Commission</b><span class="price">5 %</span><span>Inscriptions aux tournois et stages, billetterie, cagnottes.</span></div>
+        <div class="tile"><b>Sponsoring local</b><span class="price">Sur mesure</span><span>« Match présenté par », défis sponsorisés par les commerces du quartier.</span></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>17,4 M</b><span>licences sportives en France en 2025 (INJEP)</span></div>
+        <div class="stat"><b>850 000</b><span>pratiquants de padel en France (FFT)</span></div>
+        <div class="stat"><b>1,25 M€</b><span>de revenus visés en année 3, scénario de travail</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-methode">
+      <h2 id="t-methode">Méthode</h2>
+      <p class="sub">Projet personnel mené par Nicolas Pinaud en pilotant Claude (Anthropic), de l'idée au prototype.</p>
+      <div class="method">
+        <div><h3>Vision et arbitrages</h3><p>Définition des cibles, choix produit et design, orientation de chaque itération : passage d'un style ludique à une esthétique « sport pro », trois profils, carte évolutive, paris et chambrage.</p></div>
+        <div><h3>Recherche et business</h3><p>Étude de marché sourcée, analyse concurrentielle, modèle économique, projections sur trois ans, plan de lancement et leviers de viralité.</p></div>
+        <div><h3>Design et prototype</h3><p>Maquettes de 14 écrans, puis prototype web cliquable publié sur GitHub Pages, sans installation.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Concept personnel, non affilié à une fédération ou à une marque. Clubs, joueurs et scores sont fictifs. Les kops sont une monnaie fictive, sans achat ni gain d'argent.</p>
+    <p>Police Archivo, sous licence SIL Open Font License.</p>
+  </footer>
+</div>
+</body>
+</html>

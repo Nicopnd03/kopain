@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fiche match en direct · Kopain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="kopain.css">
+<script src="kopain.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#FFFFFF}a:hover{color:#9DB8FF}
+</style>
+</helmet>
+<div style="width: 430px; height: 884px; box-sizing: border-box; padding: 20px; background: #23262E; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 160px; top: 31px; width: 110px; height: 30px; border-radius: 15px; background: #000000; z-index: 5"></div>
+<div style="width: 390px; height: 844px; border-radius: 44px; box-sizing: border-box; background: #0B0D12; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="padding: 50px 8px 4px; display: flex; justify-content: space-between; align-items: center">
+    <a href="accueil.html" aria-label="Retour" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Régionale 2 · Journée 6 · Derby</span>
+    <a href="partage.html" aria-label="Partager" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11M7 9l5-5 5 5M5 14v5h14v-5"></path></svg></a>
+  </header>
+
+  <section style="position: relative; margin: 4px 16px 0; height: 132px; border-radius: 14px; overflow: hidden; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); flex-shrink: 0; color: #0B0D12">
+    <div style="background: #3DDC97; padding: 14px; display: flex; flex-direction: column; justify-content: space-between">
+      <span style="font-size: 30px; font-weight: 900; font-stretch: 75%; line-height: 1">BBC</span>
+      <span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 14px; font-weight: 800">Batignolles</span><span style="font-size: 12px; font-weight: 600">5-0 · 1er</span></span>
+    </div>
+    <div style="background: #7FB2FF; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; text-align: right">
+      <span style="font-size: 30px; font-weight: 900; font-stretch: 75%; line-height: 1">TH</span>
+      <span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 14px; font-weight: 800">Ternes</span><span style="font-size: 12px; font-weight: 600">3-2 · 3e</span></span>
+    </div>
+    <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 10px 14px; border-radius: 12px; background: #0B0D12; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; gap: 4px">
+      <span style="padding: 2px 8px; border-radius: 4px; background: #D91F26; font-size: 10px; font-weight: 800; letter-spacing: .06em">LIVE</span>
+      <span style="font-size: 38px; font-weight: 800; font-stretch: 75%; font-variant-numeric: tabular-nums; line-height: 1; white-space: nowrap">54 – 49</span>
+      <span style="font-size: 11px; font-weight: 700; color: #A3A9B8">3e QT · 4:12</span>
+    </div>
+  </section>
+
+  <div role="tablist" style="margin-top: 10px; padding: 0 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid #2A2F3C">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+      <button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="min-height: 46px; border: none; border-bottom: 2px solid {{ t.line }}; background: transparent; color: {{ t.color }}; font: 700 14px 'Archivo', sans-serif; cursor: pointer">{{ t.label }}</button>
+    </sc-for>
+  </div>
+
+  <div style="flex: 1; padding: 16px 16px 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <sc-if value="{{ isParis }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-size: 18px; font-weight: 800">Qui gagne ?</span>
+        <span style="font-size: 12px; font-weight: 600; color: #A3A9B8">214 pronos · solde {{ solde }} K</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <button onClick="{{ pickA }}" aria-pressed="{{ isA }}" style="min-height: 64px; padding: 0 14px; border-radius: 10px; border: 2px solid {{ borderA }}; background: #151821; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; align-items: center; justify-content: space-between; cursor: pointer">
+          <span style="font-size: 15px; font-weight: 700">Batignolles</span>
+          <span style="font-size: 22px; font-weight: 800; font-stretch: 75%; color: #F5B83D">1,45</span>
+        </button>
+        <button onClick="{{ pickB }}" aria-pressed="{{ isB }}" style="min-height: 64px; padding: 0 14px; border-radius: 10px; border: 2px solid {{ borderB }}; background: #151821; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; align-items: center; justify-content: space-between; cursor: pointer">
+          <span style="font-size: 15px; font-weight: 700">Ternes</span>
+          <span style="font-size: 22px; font-weight: 800; font-stretch: 75%; color: #F5B83D">2,60</span>
+        </button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{ stakes }}" as="k" hint-placeholder-count="4">
+          <button onClick="{{ k.pick }}" aria-pressed="{{ k.on }}" style="min-height: 46px; border-radius: 10px; border: 1px solid {{ k.border }}; background: {{ k.bg }}; color: {{ k.color }}; font: 800 15px 'Archivo', sans-serif; font-variant-numeric: tabular-nums; cursor: pointer">{{ k.label }}</button>
+        </sc-for>
+      </div>
+      <span style="font-size: 13px; color: #A3A9B8">Mise en kops · gain possible : <strong style="color: #FFFFFF">{{ gain }} K</strong></span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <button onClick="{{ solo }}" style="min-height: 54px; border-radius: 10px; border: 1px solid #3A4152; background: transparent; color: {{ soloColor }}; font: 700 14px 'Archivo', sans-serif; cursor: pointer">{{ soloLabel }}</button>
+        <button onClick="{{ challenge }}" style="min-height: 54px; border-radius: 10px; border: none; background: {{ duelBg }}; color: {{ duelColor }}; font: 800 14px 'Archivo', sans-serif; cursor: pointer">{{ duelLabel }}</button>
+      </div>
+      <sc-if value="{{ challenged }}" hint-placeholder-val="{{ false }}">
+        <a href="defi.html" style="min-height: 52px; padding: 0 14px; border-radius: 10px; background: #151821; border: 1px solid #F5B83D; text-decoration: none; color: #FFFFFF; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: space-between">Lien du défi prêt : voir ce que reçoit ton ami<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5B83D" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg></a>
+      </sc-if>
+      <sc-if value="{{ notChallenged }}" hint-placeholder-val="{{ true }}">
+        <span style="font-size: 12px; color: #A3A9B8; text-align: center">Kops : monnaie fictive, sans achat ni gain d'argent réel.</span>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ isChambrage }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-size: 18px; font-weight: 800">Chambrer Ternes</span>
+        <span style="font-size: 12px; font-weight: 600; color: #A3A9B8">Choisis ta pique</span>
+      </div>
+      <sc-for list="{{ lines }}" as="l" hint-placeholder-count="4">
+        <button onClick="{{ l.send }}" aria-pressed="{{ l.sent }}" style="min-height: 54px; padding: 0 14px; border-radius: 10px; border: 2px solid {{ l.border }}; background: #151821; color: #FFFFFF; font: 700 15px 'Archivo', sans-serif; text-align: left; cursor: pointer">{{ l.text }}</button>
+      </sc-for>
+      <a href="partage.html" style="min-height: 54px; border-radius: 10px; background: {{ sendBg }}; color: {{ sendColor }}; text-decoration: none; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center">Envoyer et partager l'image</a>
+    </sc-if>
+
+    <sc-if value="{{ isResume }}" hint-placeholder-val="{{ false }}">
+      <div style="padding: 8px 12px; border-radius: 10px; background: #151821; border: 1px solid #2A2F3C; display: grid; grid-template-columns: 2fr repeat(5, minmax(0, 1fr)); row-gap: 6px; font-size: 13px; font-variant-numeric: tabular-nums; text-align: center">
+        <span style="text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">ÉQUIPE</span><span style="font-size: 10px; font-weight: 700; color: #A3A9B8">QT1</span><span style="font-size: 10px; font-weight: 700; color: #A3A9B8">QT2</span><span style="font-size: 10px; font-weight: 700; color: #A3A9B8">QT3</span><span style="font-size: 10px; font-weight: 700; color: #A3A9B8">QT4</span><span style="font-size: 10px; font-weight: 700; color: #A3A9B8">TOTAL</span>
+        <span style="text-align: left; font-weight: 700">Batignolles</span><span>18</span><span>21</span><span>15</span><span style="color: #A3A9B8">-</span><span style="font-weight: 800">54</span>
+        <span style="text-align: left; font-weight: 700">Ternes</span><span>16</span><span>17</span><span>16</span><span style="color: #A3A9B8">-</span><span style="font-weight: 800">49</span>
+      </div>
+      <div style="border-radius: 10px; background: #151821; border: 1px solid #2A2F3C; padding: 4px 14px; display: flex; flex-direction: column">
+        <div style="min-height: 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2A2F3C"><span style="font-size: 15px; font-weight: 700">K. Diallo <span style="font-weight: 400; color: #A3A9B8">· Batignolles</span></span><span style="font-size: 18px; font-weight: 800; font-stretch: 75%">18 pts</span></div>
+        <div style="min-height: 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2A2F3C"><span style="font-size: 15px; font-weight: 700">M. Rey <span style="font-weight: 400; color: #A3A9B8">· Ternes</span></span><span style="font-size: 18px; font-weight: 800; font-stretch: 75%">15 pts</span></div>
+        <div style="min-height: 48px; display: flex; align-items: center; justify-content: space-between"><span style="font-size: 15px; font-weight: 700">S. Benali <span style="font-weight: 400; color: #A3A9B8">· Batignolles</span></span><span style="font-size: 18px; font-weight: 800; font-stretch: 75%">12 pts</span></div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <span style="padding: 7px 12px; border-radius: 8px; background: #151821; border: 1px solid #2A2F3C; font-size: 13px; font-weight: 600">Gymnase [NOM] · 600 m</span>
+        <span style="padding: 7px 12px; border-radius: 8px; background: #151821; border: 1px solid #2A2F3C; font-size: 13px; font-weight: 600">Entrée libre</span>
+        <span style="padding: 7px 12px; border-radius: 8px; background: #151821; border: 1px solid #2A2F3C; font-size: 13px; font-weight: 600">Buvette ouverte</span>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="flex-shrink: 0; padding: 10px 16px 28px; border-top: 1px solid #2A2F3C; display: flex; gap: 8px">
+    <a href="vote.html" style="min-height: 50px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A4152; text-decoration: none; color: #FFFFFF; font-size: 14px; font-weight: 700; display: flex; align-items: center">QR du vote</a>
+    <button onClick="{{ toggleGo }}" aria-pressed="{{ going }}" style="flex: 1; min-height: 50px; border-radius: 10px; border: 1px solid {{ goBorder }}; background: {{ goBg }}; color: {{ goColor }}; font: 800 14px 'Archivo', sans-serif; cursor: pointer">{{ goLabel }}</button>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2558E6","options":["#2558E6","#D91F26","#0B7A53","#7C3AED"]},"$preview":{"width":430,"height":884}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'paris', side: '', mise: 50, placed: false, challenged: false, sent: -1, going: false };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#2558E6';
+    const s = this.state;
+    const tabs = [
+      { id: 'paris', label: 'Paris' },
+      { id: 'chambrage', label: 'Chambrage' },
+      { id: 'resume', label: 'Résumé' }
+    ].map((t) => ({
+      label: t.label,
+      on: s.tab === t.id,
+      line: s.tab === t.id ? accent : 'transparent',
+      color: s.tab === t.id ? '#FFFFFF' : '#A3A9B8',
+      pick: () => this.setState({ tab: t.id })
+    }));
+    const cote = s.side === 'b' ? 2.6 : 1.45;
+    const ready = s.side !== '';
+    const stakes = [25, 50, 100, 250].map((v) => ({
+      label: v + ' K',
+      on: s.mise === v,
+      bg: s.mise === v ? '#FFFFFF' : 'transparent',
+      color: s.mise === v ? '#0B0D12' : '#FFFFFF',
+      border: s.mise === v ? '#FFFFFF' : '#3A4152',
+      pick: () => this.setState({ mise: v, placed: false, challenged: false })
+    }));
+    const lines = [
+      'Rentrez chez vous, c’est plié.',
+      'On se revoit au match retour.',
+      'Belle perf, pour un entraînement.',
+      'Le banc de touche vous salue.'
+    ].map((text, i) => ({
+      text: text,
+      sent: s.sent === i,
+      border: s.sent === i ? '#F5B83D' : '#2A2F3C',
+      send: () => this.setState({ sent: i })
+    }));
+    const used = s.placed || s.challenged;
+    return {
+      accent: accent,
+      tabs: tabs,
+      isParis: s.tab === 'paris',
+      isChambrage: s.tab === 'chambrage',
+      isResume: s.tab === 'resume',
+      isA: s.side === 'a',
+      isB: s.side === 'b',
+      borderA: s.side === 'a' ? '#F5B83D' : '#2A2F3C',
+      borderB: s.side === 'b' ? '#F5B83D' : '#2A2F3C',
+      pickA: () => this.setState({ side: 'a', placed: false, challenged: false }),
+      pickB: () => this.setState({ side: 'b', placed: false, challenged: false }),
+      stakes: stakes,
+      gain: Math.round(s.mise * cote),
+      solde: used ? (1250 - s.mise).toLocaleString('fr-FR') : '1 250',
+      soloLabel: s.placed ? 'Pari enregistré' : 'Parier seul',
+      soloColor: s.placed ? '#3DDC97' : (ready ? '#FFFFFF' : '#A3A9B8'),
+      solo: () => { if (ready) this.setState({ placed: true, challenged: false }); },
+      duelLabel: s.challenged ? 'Défi créé' : 'Défier un ami',
+      duelBg: s.challenged ? '#3DDC97' : (ready ? '#F5B83D' : '#1D212C'),
+      duelColor: ready || s.challenged ? '#0B0D12' : '#A3A9B8',
+      challenge: () => { if (ready) this.setState({ challenged: true, placed: false }); },
+      challenged: s.challenged,
+      notChallenged: !s.challenged,
+      lines: lines,
+      sendBg: s.sent >= 0 ? '#F5B83D' : '#1D212C',
+      sendColor: s.sent >= 0 ? '#0B0D12' : '#A3A9B8',
+      going: s.going,
+      goLabel: s.going ? 'Tu y vas · 38 supporters' : 'J’y vais · 37 supporters',
+      goBg: s.going ? '#FFFFFF' : accent,
+      goColor: s.going ? '#0B0D12' : '#FFFFFF',
+      goBorder: s.going ? '#FFFFFF' : accent,
+      toggleGo: () => this.setState({ going: !s.going })
+    };
+  }
+}
+</script>
+</body>
+</html>

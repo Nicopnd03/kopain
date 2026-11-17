@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cartes à partager · Kopain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="kopain.css">
+<script src="kopain.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#FFFFFF}a:hover{color:#9DB8FF}
+</style>
+</helmet>
+<div style="width: 430px; height: 884px; box-sizing: border-box; padding: 20px; background: #23262E; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 160px; top: 31px; width: 110px; height: 30px; border-radius: 15px; background: #000000; z-index: 5"></div>
+<div style="width: 390px; height: 844px; border-radius: 44px; box-sizing: border-box; background: #0B0D12; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; padding: 50px 16px 28px; gap: 12px; overflow: hidden">
+  <header style="display: flex; justify-content: space-between; align-items: center">
+    <a href="kop.html" aria-label="Retour" style="width: 44px; height: 44px; margin-left: -10px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <span style="display: flex; flex-direction: column; align-items: center; gap: 1px"><span style="font-size: 16px; font-weight: 800">Match terminé</span><span style="font-size: 12px; color: #A3A9B8">Ta story est prête</span></span>
+    <span style="width: 34px"></span>
+  </header>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+    <sc-for list="{{ kinds }}" as="k" hint-placeholder-count="3">
+      <button onClick="{{ k.pick }}" aria-pressed="{{ k.on }}" style="min-height: 44px; border-radius: 22px; border: 1px solid {{ k.border }}; background: {{ k.bg }}; color: {{ k.color }}; font: 700 13px 'Archivo', sans-serif; cursor: pointer">{{ k.label }}</button>
+    </sc-for>
+  </div>
+
+  <article aria-label="Aperçu de la carte au format story" style="align-self: center; width: 290px; height: 478px; flex-shrink: 0; border-radius: 16px; background: #151821; border: 1px solid #2A2F3C; overflow: hidden; display: flex; flex-direction: column">
+    <div style="background: #3DDC97; color: #0B0D12; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center">
+      <span style="font-size: 12px; font-weight: 900; letter-spacing: .12em">{{ band }}</span>
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: .06em">BASKET · R2 · J5</span>
+    </div>
+
+    <div style="flex: 1; padding: 18px 16px; display: flex; flex-direction: column; gap: 14px">
+      <sc-if value="{{ isResult }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span style="flex: 1; font-size: 19px; font-weight: 800; line-height: 1.15">Batignolles BC</span>
+          <span style="font-size: 60px; font-weight: 900; font-stretch: 75%; font-variant-numeric: tabular-nums; line-height: .9">78</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span style="flex: 1; font-size: 19px; font-weight: 600; line-height: 1.15; color: #A3A9B8">Monceau Basket</span>
+          <span style="font-size: 60px; font-weight: 900; font-stretch: 75%; font-variant-numeric: tabular-nums; line-height: .9; color: #A3A9B8">71</span>
+        </div>
+        <div style="padding: 12px 14px; border-radius: 10px; background: #0B0D12; border: 1px solid #2A2F3C; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 10px; font-weight: 700; letter-spacing: .1em; color: #F5B83D">JOUEUR DU MATCH · VOTE DU PUBLIC</span>
+          <span style="font-size: 20px; font-weight: 800">K. Diallo</span>
+          <span style="font-size: 13px; color: #A3A9B8">24 points · 7 rebonds · 5 passes</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); font-variant-numeric: tabular-nums">
+          <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 22px; font-weight: 800; font-stretch: 75%">37</span><span style="font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">SUPPORTERS</span></div>
+          <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 22px; font-weight: 800; font-stretch: 75%">214</span><span style="font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">PRONOS</span></div>
+          <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 22px; font-weight: 800; font-stretch: 75%">5-0</span><span style="font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">BILAN</span></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isPerf }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: flex-end; gap: 10px">
+          <span style="font-size: 132px; font-weight: 900; font-stretch: 75%; line-height: .8; letter-spacing: -.03em; font-variant-numeric: tabular-nums">18</span>
+          <span style="padding-bottom: 6px; font-size: 22px; font-weight: 800; color: #3DDC97">POINTS</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 24px; font-weight: 800">Nicolas P.</span>
+          <span style="font-size: 14px; color: #A3A9B8">N° 7 · Meneur · Batignolles BC</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px 0; border-top: 1px solid #2A2F3C; border-bottom: 1px solid #2A2F3C; font-variant-numeric: tabular-nums">
+          <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 26px; font-weight: 800; font-stretch: 75%">5</span><span style="font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">PASSES</span></div>
+          <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 26px; font-weight: 800; font-stretch: 75%">4</span><span style="font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">REBONDS</span></div>
+          <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 26px; font-weight: 800; font-stretch: 75%">2</span><span style="font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">INTERCEPTIONS</span></div>
+        </div>
+        <span style="font-size: 15px; font-weight: 700">Victoire 78 – 71 contre Monceau</span>
+      </sc-if>
+
+      <sc-if value="{{ isChambrage }}" hint-placeholder-val="{{ false }}">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #A3A9B8">BATIGNOLLES BC À MONCEAU BASKET</span>
+        <p style="margin: 0; font-size: 34px; font-weight: 900; line-height: 1.08; letter-spacing: -.01em">« On se revoit au match retour. »</p>
+        <div style="margin-top: auto; padding: 12px 14px; border-radius: 10px; background: #0B0D12; border: 1px solid #2A2F3C; display: flex; align-items: center; justify-content: space-between">
+          <span style="font-size: 14px; font-weight: 700">Batignolles – Monceau</span>
+          <span style="font-size: 26px; font-weight: 900; font-stretch: 75%; font-variant-numeric: tabular-nums">78 – 71</span>
+        </div>
+        <span style="font-size: 14px; font-weight: 700; color: #F5B83D">Une réponse ? Elle se passe sur Kopain.</span>
+      </sc-if>
+    </div>
+
+    <div style="padding: 12px 16px; border-top: 1px solid #2A2F3C; display: flex; align-items: center; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 15px; font-weight: 900; font-stretch: 125%; letter-spacing: .04em">KOPAIN</span>
+        <span style="font-size: 11px; color: #A3A9B8">{{ foot }}</span>
+      </div>
+      <span style="width: 46px; height: 46px; border-radius: 6px; background: #FFFFFF; color: #0B0D12; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">[QR]</span>
+    </div>
+  </article>
+
+  <div style="margin-top: auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px">
+    <button style="min-height: 54px; border-radius: 10px; border: none; background: #F5B83D; color: #0B0D12; font: 800 15px 'Archivo', sans-serif; cursor: pointer">Publier en story</button>
+    <button style="min-height: 54px; border-radius: 10px; border: 1px solid #3A4152; background: transparent; color: #FFFFFF; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Message</button>
+    <button onClick="{{ copy }}" style="min-height: 54px; border-radius: 10px; border: 1px solid #3A4152; background: transparent; color: {{ copyColor }}; font: 700 14px 'Archivo', sans-serif; cursor: pointer">{{ copyLabel }}</button>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2558E6","options":["#2558E6","#D91F26","#0B7A53","#7C3AED"]},"$preview":{"width":430,"height":884}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { kind: 'result', copied: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const kinds = [
+      { id: 'result', label: 'Résultat' },
+      { id: 'perf', label: 'Ma perf' },
+      { id: 'chambrage', label: 'Chambrage' }
+    ].map((k) => ({
+      label: k.label,
+      on: s.kind === k.id,
+      bg: s.kind === k.id ? '#FFFFFF' : 'transparent',
+      color: s.kind === k.id ? '#0B0D12' : '#FFFFFF',
+      border: s.kind === k.id ? '#FFFFFF' : '#3A4152',
+      pick: () => this.setState({ kind: k.id })
+    }));
+    const bands = { result: 'SCORE FINAL', perf: 'MA PERF', chambrage: 'CHAMBRAGE' };
+    const feet = { result: 'Scanne pour suivre le club', perf: 'Scanne pour voir ma carte joueur', chambrage: 'Scanne pour répondre' };
+    return {
+      accent: this.props.accent ?? '#2558E6',
+      kinds: kinds,
+      isResult: s.kind === 'result',
+      isPerf: s.kind === 'perf',
+      isChambrage: s.kind === 'chambrage',
+      band: bands[s.kind],
+      foot: feet[s.kind],
+      copyLabel: s.copied ? 'Copié' : 'Lien',
+      copyColor: s.copied ? '#3DDC97' : '#FFFFFF',
+      copy: () => this.setState({ copied: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

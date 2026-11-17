@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Carte du club et actualités · Kopain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="kopain.css">
+<script src="kopain.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#FFFFFF}a:hover{color:#9DB8FF}
+</style>
+</helmet>
+<div style="width: 430px; height: 884px; box-sizing: border-box; padding: 20px; background: #23262E; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 160px; top: 31px; width: 110px; height: 30px; border-radius: 15px; background: #000000; z-index: 5"></div>
+<div style="width: 390px; height: 844px; border-radius: 44px; box-sizing: border-box; background: #0B0D12; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="flex: 1; padding: 50px 16px 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-left: -10px">
+      <a href="kop.html" aria-label="Retour" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Carte club</span>
+      <a href="partage.html" aria-label="Partager la carte du club" style="width: 44px; height: 44px; margin-right: -10px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11M7 9l5-5 5 5M5 14v5h14v-5"></path></svg></a>
+    </div>
+
+    <div style="display: flex; gap: 16px; align-items: center">
+      <article aria-label="Carte du club Batignolles BC, note 81" style="position: relative; width: 150px; height: 210px; flex-shrink: 0">
+        <div aria-hidden="true" style="position: absolute; inset: 0; background: #1E8F5F; clip-path: polygon(50% 0, 100% 7%, 100% 80%, 50% 100%, 0 80%, 0 7%)"></div>
+        <div style="position: absolute; inset: 3px; background: #3DDC97; clip-path: polygon(50% 0, 100% 7%, 100% 80%, 50% 100%, 0 80%, 0 7%); color: #0B0D12; display: flex; flex-direction: column; align-items: center; padding: 22px 14px 0; box-sizing: border-box">
+          <div style="align-self: stretch; display: flex; justify-content: space-between; align-items: flex-start">
+            <span style="display: flex; flex-direction: column; align-items: center"><span style="font-size: 36px; font-weight: 900; font-stretch: 75%; line-height: .95">81</span><span style="font-size: 10px; font-weight: 900; letter-spacing: .06em">CLUB</span></span>
+            <span style="font-size: 38px; font-weight: 900; font-stretch: 75%; line-height: 1">BBC</span>
+          </div>
+          <span style="align-self: stretch; margin-top: 6px; padding: 4px 0; border-top: 2px solid #0B0D12; border-bottom: 2px solid #0B0D12; font-size: 11px; font-weight: 900; letter-spacing: .02em; text-align: center; white-space: nowrap">BATIGNOLLES BC</span>
+          <div style="align-self: stretch; margin-top: 6px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2px; font-size: 11px; font-weight: 800; text-align: center">
+            <span>1er RANG</span><span>5-0 BILAN</span><span>78 PTS/M</span><span>{{ supporters }} FANS</span>
+          </div>
+          <span style="margin-top: 6px; font-size: 9px; font-weight: 800; letter-spacing: .08em">BASKET · R2</span>
+        </div>
+      </article>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 8px">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 900; line-height: 1.05; letter-spacing: -.01em">Batignolles BC</h1>
+        <span style="font-size: 13px; line-height: 1.35; color: #A3A9B8">Basket · Paris 17e<br>Club depuis [ANNÉE]</span>
+        <button onClick="{{ toggleFollow }}" aria-pressed="{{ following }}" style="min-height: 48px; border-radius: 10px; border: 1px solid #FFFFFF; background: {{ followBg }}; color: {{ followColor }}; font: 800 15px 'Archivo', sans-serif; cursor: pointer">{{ followLabel }}</button>
+        <span style="font-size: 12px; color: #A3A9B8">{{ followNote }}</span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid #2A2F3C">
+      <button aria-pressed="true" style="min-height: 44px; border: none; border-bottom: 2px solid {{accent}}; background: transparent; color: #FFFFFF; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Actualités</button>
+      <button aria-pressed="false" style="min-height: 44px; border: none; border-bottom: 2px solid transparent; background: transparent; color: #A3A9B8; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Matchs</button>
+      <button aria-pressed="false" style="min-height: 44px; border: none; border-bottom: 2px solid transparent; background: transparent; color: #A3A9B8; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Effectif</button>
+    </div>
+
+    <div style="min-height: 44px; padding: 0 4px 0 12px; border-radius: 10px; border: 1px solid #F5B83D; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+      <span style="font-size: 13px; font-weight: 700">Tu administres cette page</span>
+      <a href="creer.html" style="min-height: 44px; padding: 0 10px; display: flex; align-items: center; text-decoration: none; color: #F5B83D; font-size: 13px; font-weight: 800">Publier une actu</a>
+    </div>
+
+    <a href="match.html" style="text-decoration: none; color: #FFFFFF; padding: 12px 14px; border-radius: 12px; background: #151821; border: 1px solid #2A2F3C; display: flex; flex-direction: column; gap: 4px">
+      <span style="display: flex; align-items: center; gap: 8px"><span style="padding: 2px 6px; border-radius: 4px; background: #D91F26; font-size: 10px; font-weight: 800; letter-spacing: .06em">LIVE</span><span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">En ce moment · à domicile</span></span>
+      <span style="font-size: 17px; font-weight: 800">Batignolles 54 – 49 Ternes</span>
+      <span style="font-size: 13px; color: #A3A9B8">3e quart-temps · 37 supporters sur place</span>
+    </a>
+
+    <article style="padding: 12px 14px; border-radius: 12px; background: #151821; border: 1px solid #2A2F3C; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Résultat · hier</span>
+      <span style="font-size: 17px; font-weight: 800">Derby gagné 78 – 71 contre Monceau</span>
+      <span style="font-size: 13px; color: #A3A9B8">K. Diallo joueur du match · 142 bravos · 38 réactions</span>
+    </article>
+
+    <a href="jouer.html" style="text-decoration: none; color: #FFFFFF; padding: 12px 14px; border-radius: 12px; background: #151821; border: 1px solid #2A2F3C; display: flex; align-items: center; gap: 12px">
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Recrutement · il y a 2 jours</span>
+        <span style="font-size: 17px; font-weight: 800">On cherche 2 joueurs en loisir</span>
+        <span style="font-size: 13px; color: #A3A9B8">Séance d'essai gratuite mercredi 19h</span>
+      </span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3A9B8" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg>
+    </a>
+  </div>
+
+  <nav aria-label="Navigation principale" style="height: 84px; flex-shrink: 0; background: #0B0D12; border-top: 1px solid #2A2F3C; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; box-sizing: border-box">
+    <a href="accueil.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M12 5v14M7.5 10v4M16.5 10v4"></path></svg>Matchs</a>
+    <a href="jouer.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5M17 5.5a3 3 0 0 1 0 6M18.5 15c1.6.8 2.6 2.4 3 5"></path></svg>Jouer</a>
+    <a href="creer.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><span style="width: 30px; height: 26px; border-radius: 7px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>Créer</a>
+    <a href="kop.html" aria-current="page" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #FFFFFF; border-top: 2px solid {{accent}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M4 10v4h3l7 4V6L7 10z"></path><path d="M17.5 9.5a4 4 0 0 1 0 5"></path></svg>Kop</a>
+    <a href="ma-carte.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Moi</a>
+  </nav>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2558E6","options":["#2558E6","#D91F26","#0B7A53","#7C3AED"]},"$preview":{"width":430,"height":884}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { following: false };
+  }
+  renderVals() {
+    const following = this.state.following;
+    return {
+      accent: this.props.accent ?? '#2558E6',
+      following: following,
+      supporters: following ? 413 : 412,
+      followLabel: following ? 'Club suivi' : 'Suivre le club',
+      followNote: following ? 'Tu recevras ses scores et ses actus' : 'Scores, actus et alertes de match',
+      followBg: following ? 'transparent' : '#FFFFFF',
+      followColor: following ? '#FFFFFF' : '#0B0D12',
+      toggleFollow: () => this.setState({ following: !following })
+    };
+  }
+}
+</script>
+</body>
+</html>

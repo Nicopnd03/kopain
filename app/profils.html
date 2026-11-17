@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Choix du profil · Kopain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="kopain.css">
+<script src="kopain.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#FFFFFF}a:hover{color:#9DB8FF}
+</style>
+</helmet>
+<div style="width: 430px; height: 884px; box-sizing: border-box; padding: 20px; background: #23262E; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 160px; top: 31px; width: 110px; height: 30px; border-radius: 15px; background: #000000; z-index: 5"></div>
+<div style="width: 390px; height: 844px; border-radius: 44px; box-sizing: border-box; background: #0B0D12; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; padding: 50px 16px 28px; gap: 14px; overflow: hidden">
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <a href="bienvenue.html" aria-label="Retour" style="width: 44px; height: 44px; margin-left: -10px; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <div role="img" aria-label="Étape 1 sur 3" style="display: flex; gap: 4px">
+      <span style="width: 40px; height: 4px; border-radius: 2px; background: #FFFFFF"></span>
+      <span style="width: 40px; height: 4px; border-radius: 2px; background: #2A2F3C"></span>
+      <span style="width: 40px; height: 4px; border-radius: 2px; background: #2A2F3C"></span>
+    </div>
+    <span style="width: 34px; font-size: 12px; font-weight: 700; color: #A3A9B8; text-align: right">1 / 3</span>
+  </div>
+
+  <header style="display: flex; flex-direction: column; gap: 6px">
+    <h1 style="margin: 0; font-size: 30px; font-weight: 900; line-height: 1.05; letter-spacing: -.02em">Tu es plutôt ?</h1>
+    <span style="font-size: 15px; line-height: 1.4; color: #A3A9B8">Ton profil décide de ta carte. Tu pourras en changer ou les cumuler.</span>
+  </header>
+
+  <sc-for list="{{ profiles }}" as="p" hint-placeholder-count="3">
+    <button onClick="{{ p.pick }}" aria-pressed="{{ p.on }}" style="text-align: left; min-height: 98px; padding: 12px 14px; border-radius: 12px; border: 2px solid {{ p.border }}; background: #151821; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; align-items: center; gap: 14px; cursor: pointer">
+      <span aria-hidden="true" style="width: 48px; height: 66px; flex-shrink: 0; background: #C98A4B; clip-path: {{ p.clip }}; color: #0B0D12; font-size: 11px; font-weight: 900; letter-spacing: .04em; display: flex; align-items: center; justify-content: center">{{ p.code }}</span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 3px">
+        <span style="font-size: 17px; font-weight: 800">{{ p.title }}</span>
+        <span style="font-size: 13px; line-height: 1.35; color: #A3A9B8">{{ p.text }}</span>
+      </span>
+      <span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid {{ p.ring }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-sizing: border-box"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ p.dot }}"></span></span>
+    </button>
+  </sc-for>
+
+  <div style="padding: 12px 14px; border-radius: 12px; border: 1px solid #2A2F3C; display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #F5B83D">Avec les trois profils, tu peux</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; row-gap: 6px; font-size: 13px; font-weight: 600">
+      <span>Gérer une page club</span><span>Chercher un joueur</span>
+      <span>Supporter un club</span><span>Chambrer l'adversaire</span>
+      <span>Parier en kops</span><span>Gagner des trophées</span>
+    </div>
+  </div>
+
+  <a href="equipe.html" style="margin-top: auto; min-height: 54px; border-radius: 10px; background: #F5B83D; color: #0B0D12; text-decoration: none; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center">{{ cta }}</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2558E6","options":["#2558E6","#D91F26","#0B7A53","#7C3AED"]},"$preview":{"width":430,"height":884}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: 'licencie' };
+  }
+  renderVals() {
+    const sel = this.state.sel;
+    const all = [
+      { id: 'licencie', code: 'LIC', title: 'Joueur licencié', text: 'Tu joues en club. Carte notée par tes coéquipiers, reliée à ton équipe et à ton championnat.', clip: 'polygon(50% 0, 100% 7%, 100% 80%, 50% 100%, 0 80%, 0 7%)', cta: 'Créer ma carte de joueur' },
+      { id: 'loisir', code: 'LOI', title: 'Pratiquant loisir', text: 'Tu joues sans licence. Carte fondée sur tes parties, ton niveau et ta fiabilité.', clip: 'polygon(14% 0, 86% 0, 100% 10%, 100% 90%, 86% 100%, 14% 100%, 0 90%, 0 10%)', cta: 'Créer ma carte loisir' },
+      { id: 'supporter', code: 'KOP', title: 'Supporter', text: 'Tu viens voir et encourager. Carte fondée sur ta fidélité, tes pronos et ton chambrage.', clip: 'polygon(0 0, 100% 0, 100% 43%, 90% 50%, 100% 57%, 100% 100%, 0 100%, 0 57%, 10% 50%, 0 43%)', cta: 'Créer ma carte de supporter' }
+    ];
+    const profiles = all.map((p) => {
+      const on = sel === p.id;
+      return {
+        code: p.code,
+        title: p.title,
+        text: p.text,
+        clip: p.clip,
+        on: on,
+        border: on ? '#FFFFFF' : '#2A2F3C',
+        ring: on ? '#FFFFFF' : '#A3A9B8',
+        dot: on ? '#FFFFFF' : 'transparent',
+        pick: () => this.setState({ sel: p.id })
+      };
+    });
+    const cur = all.filter((p) => p.id === sel).pop();
+    return { accent: this.props.accent ?? '#2558E6', profiles: profiles, cta: cur.cta };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Jouer : partenaires et joueur manquant · Kopain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="kopain.css">
+<script src="kopain.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#FFFFFF}a:hover{color:#9DB8FF}
+</style>
+</helmet>
+<div style="width: 430px; height: 884px; box-sizing: border-box; padding: 20px; background: #23262E; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 160px; top: 31px; width: 110px; height: 30px; border-radius: 15px; background: #000000; z-index: 5"></div>
+<div style="width: 390px; height: 844px; border-radius: 44px; box-sizing: border-box; background: #0B0D12; color: #FFFFFF; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="flex: 1; padding: 52px 16px 0; display: flex; flex-direction: column; gap: 14px; overflow: hidden">
+    <header style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Paris 17e · rayon 3 km</span>
+      <h1 style="margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -.01em">Jouer</h1>
+    </header>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid #2A2F3C">
+      <button aria-pressed="true" style="min-height: 44px; border: none; border-bottom: 2px solid {{accent}}; background: transparent; color: #FFFFFF; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Joueur manquant · 6</button>
+      <button aria-pressed="false" style="min-height: 44px; border: none; border-bottom: 2px solid transparent; background: transparent; color: #A3A9B8; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Entraînement · 9</button>
+    </div>
+
+    <article style="padding: 14px; border-radius: 12px; background: #151821; border: 1px solid #2A2F3C; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Padel · niveau 4 · 1,2 km</span>
+        <span style="font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums">Ce soir 19:00</span>
+      </div>
+      <span style="font-size: 18px; font-weight: 800">Il manque 1 joueur</span>
+      <div style="display: flex; align-items: center; gap: 6px">
+        <span style="width: 38px; height: 38px; border-radius: 50%; background: #2A2F3C; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center">CM</span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background: #2A2F3C; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center">YB</span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background: #2A2F3C; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center">JL</span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background: {{ slotBg }}; border: {{ slotBorder }}; color: {{ slotColor }}; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-sizing: border-box">{{ slotLabel }}</span>
+        <span style="margin-left: auto; font-size: 12px; color: #A3A9B8; text-align: right; line-height: 1.35">Organisé par Camille<br><strong style="color: #3DDC97">98 % de présence</strong></span>
+      </div>
+      <button onClick="{{ toggleJoin }}" aria-pressed="{{ joined }}" style="min-height: 48px; border-radius: 10px; border: none; background: {{ joinBg }}; color: {{ joinColor }}; font: 800 15px 'Archivo', sans-serif; cursor: pointer">{{ joinLabel }}</button>
+    </article>
+
+    <article style="padding: 14px; border-radius: 12px; background: #151821; border: 1px solid #2A2F3C; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Course · 6:00 / km · 800 m</span>
+        <span style="font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums">Dim. 09:00</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 18px; font-weight: 800">Footing 8 km</span>
+          <span style="font-size: 13px; color: #A3A9B8">Parc Monceau · 2 inscrits · tous niveaux</span>
+        </div>
+        <button style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A4152; background: transparent; color: #FFFFFF; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Rejoindre</button>
+      </div>
+    </article>
+
+    <article style="padding: 14px; border-radius: 12px; background: #151821; border: 1px solid #2A2F3C; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #A3A9B8">Foot à 5 · tous niveaux · 1,4 km</span>
+        <span style="font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums">Jeu. 20:00</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 18px; font-weight: 800">Il manque 2 joueurs</span>
+          <span style="font-size: 13px; color: #A3A9B8">8 inscrits sur 10 · 6 € par joueur</span>
+        </div>
+        <button style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A4152; background: transparent; color: #FFFFFF; font: 700 14px 'Archivo', sans-serif; cursor: pointer">Rejoindre</button>
+      </div>
+    </article>
+  </div>
+
+  <nav aria-label="Navigation principale" style="height: 84px; flex-shrink: 0; background: #0B0D12; border-top: 1px solid #2A2F3C; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; box-sizing: border-box">
+    <a href="accueil.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M12 5v14M7.5 10v4M16.5 10v4"></path></svg>Matchs</a>
+    <a href="jouer.html" aria-current="page" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #FFFFFF; border-top: 2px solid {{accent}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5M17 5.5a3 3 0 0 1 0 6M18.5 15c1.6.8 2.6 2.4 3 5"></path></svg>Jouer</a>
+    <a href="creer.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><span style="width: 30px; height: 26px; border-radius: 7px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>Créer</a>
+    <a href="kop.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M4 10v4h3l7 4V6L7 10z"></path><path d="M17.5 9.5a4 4 0 0 1 0 5"></path></svg>Kop</a>
+    <a href="ma-carte.html" style="height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #A3A9B8; border-top: 2px solid transparent"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Moi</a>
+  </nav>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2558E6","options":["#2558E6","#D91F26","#0B7A53","#7C3AED"]},"$preview":{"width":430,"height":884}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { joined: false };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#2558E6';
+    const joined = this.state.joined;
+    return {
+      accent: accent,
+      joined: joined,
+      slotBg: joined ? '#FFFFFF' : 'transparent',
+      slotBorder: joined ? '1px solid #FFFFFF' : '1px dashed #A3A9B8',
+      slotColor: joined ? '#0B0D12' : '#A3A9B8',
+      slotLabel: joined ? 'Toi' : '?',
+      joinBg: joined ? '#3DDC97' : accent,
+      joinColor: joined ? '#0B0D12' : '#FFFFFF',
+      joinLabel: joined ? 'Place réservée' : 'Prendre la place',
+      toggleJoin: () => this.setState({ joined: !joined })
+    };
+  }
+}
+</script>
+</body>
+</html>

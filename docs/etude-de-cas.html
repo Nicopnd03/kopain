@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Étude de cas · Kopain</title>
+<style>
+@font-face {
+  font-family: 'Archivo'; font-style: normal; font-display: swap;
+  font-weight: 100 900; font-stretch: 62% 125%;
+  src: url(../app/fonts/archivo-latin-wdth-normal.woff2) format('woff2');
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #0B0D12; color: #E6E8EE; font-family: 'Archivo', system-ui, sans-serif; line-height: 1.6; }
+main { max-width: 860px; margin: 0 auto; padding: 24px 24px 80px; }
+.back { display: inline-flex; align-items: center; min-height: 44px; color: #A3A9B8; text-decoration: none; font-weight: 700; font-size: 14px; }
+.back:hover { color: #FFFFFF; }
+h1 { font-size: clamp(34px, 6vw, 54px); font-weight: 900; letter-spacing: -.03em; line-height: 1.05; color: #FFFFFF; margin: 16px 0 8px; }
+h2 { font-size: 26px; font-weight: 900; letter-spacing: -.01em; color: #FFFFFF; margin: 48px 0 12px; padding-top: 16px; border-top: 2px solid #F5B83D; }
+p, li { font-size: 16px; }
+a { color: #9DB8FF; }
+strong { color: #FFFFFF; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #2A2F3C; vertical-align: top; }
+th { color: #A3A9B8; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+td { font-variant-numeric: tabular-nums; }
+hr { border: none; border-top: 1px solid #2A2F3C; margin: 48px 0 16px; }
+hr + p { color: #A3A9B8; font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="../index.html">&larr; Retour à Kopain</a>
+<h1>Kopain · étude de cas</h1>
+<p>Concept d'application mobile pour le sport amateur et loisir. Document de travail, novembre 2026.</p>
+<h2>En bref</h2>
+<p>Kopain est commercialisable à condition d'être lancé de façon étroite : une zone, deux sports, un usage utile dès le premier jour. Le marché existe (17,4 millions de licences sportives en France en 2025) et aucun acteur ne relie aujourd'hui le public, les joueurs et les clubs amateurs.</p>
+<p>Trois conditions décident du succès :</p>
+<ul>
+<li><strong>Une utilité immédiate, même seul.</strong> La carte montre des matchs dès l'installation, sans attendre que des amis s'inscrivent.</li>
+<li><strong>De la densité avant de l'étendue.</strong> 5 000 utilisateurs dans un quartier valent mieux que 50 000 éparpillés en France.</li>
+<li><strong>Des revenus qui ne reposent pas sur les clubs.</strong> Les clubs amateurs ont peu de budget : ils apportent le contenu, les joueurs et les sponsors apportent le revenu.</li>
+</ul>
+<h2>Concept et positionnement</h2>
+<p>Kopain est la carte vivante du sport amateur : ce qui se joue près de chez soi, avec qui jouer, et quel club supporter.</p>
+<table>
+<thead>
+<tr>
+<th>Verbe</th>
+<th>Ce que fait l'utilisateur</th>
+<th>Pour qui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Voir</td>
+<td>Repère sur une carte les matchs, tournois et initiations amateurs autour de lui</td>
+<td>Habitants, familles, curieux</td>
+</tr>
+<tr>
+<td>Jouer</td>
+<td>Trouve un partenaire de footing ou le 4e joueur de padel en trois gestes</td>
+<td>Pratiquants loisir, avec ou sans club</td>
+</tr>
+<tr>
+<td>Supporter</td>
+<td>Suit son club, réagit aux résultats, chambre le club voisin, parie en monnaie fictive</td>
+<td>Licenciés, parents, anciens joueurs</td>
+</tr>
+</tbody>
+</table>
+<p>Les outils existants parlent à l'intérieur du club (convocations, cotisations) ou à un seul sport. Kopain parle à l'extérieur, tous sports confondus, et part de la géolocalisation plutôt que du championnat.</p>
+<p>Trois profils coexistent, avec chacun sa carte à collectionner : <strong>joueur licencié</strong>, <strong>pratiquant loisir</strong> et <strong>supporter</strong>. Tous peuvent administrer une page club, chercher un joueur, chambrer et parier en kops.</p>
+<h2>Marché et concurrence</h2>
+<table>
+<thead>
+<tr>
+<th>Repère</th>
+<th>Chiffre</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Licences sportives en France, 2025</td>
+<td>17,4 millions (+1,7 % sur un an)</td>
+<td><a href="https://patrickbayeux.com/wp-content/uploads/2026/08/2608-Licences-sportives.pdf">INJEP</a></td>
+</tr>
+<tr>
+<td>Football</td>
+<td>2,37 millions de licences</td>
+<td><a href="https://patrickbayeux.com/wp-content/uploads/2026/08/2608-Licences-sportives.pdf">INJEP</a></td>
+</tr>
+<tr>
+<td>Tennis et padel</td>
+<td>1,23 million de licences</td>
+<td><a href="https://patrickbayeux.com/wp-content/uploads/2026/08/2608-Licences-sportives.pdf">INJEP</a></td>
+</tr>
+<tr>
+<td>Basket</td>
+<td>631 000 licences</td>
+<td><a href="https://patrickbayeux.com/wp-content/uploads/2026/08/2608-Licences-sportives.pdf">INJEP</a></td>
+</tr>
+<tr>
+<td>Padel, pratiquants en France</td>
+<td>850 000, sur 4 520 pistes (+41 % en un an)</td>
+<td><a href="https://padel-magazine.co.uk/padel-en-france-850-000-pratiquants-4-520-pistes-la-croissance-change-dechelle/">Padel Magazine</a></td>
+</tr>
+<tr>
+<td>Strava, utilisateurs actifs mensuels</td>
+<td>50 millions en 2025</td>
+<td><a href="https://techcrunch.com/2025/10/12/strava-eyes-ipo-as-gen-z-trades-dating-apps-for-running-clubs/">TechCrunch</a></td>
+</tr>
+<tr>
+<td>Strava, revenus des achats intégrés</td>
+<td>Plus de 184 M$ en 2025</td>
+<td><a href="https://appmagic.rocks/blog/strava-growth-story">AppMagic</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Acteur</th>
+<th>Ce qu'il fait bien</th>
+<th>Ce qu'il laisse libre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://scorenco.com/">Score'n'co</a></td>
+<td>Résultats, classements et live des clubs amateurs</td>
+<td>La carte des événements pour le grand public, la recherche de partenaires</td>
+</tr>
+<tr>
+<td><a href="https://www.frenchweb.fr/sporteasy-leve-5-millions-deuros-aupres-de-seventure-partners-et-macif/424545">SportEasy</a></td>
+<td>Gestion interne d'équipe : convocations, présences, cotisations</td>
+<td>Tout ce qui est tourné vers l'extérieur du club</td>
+</tr>
+<tr>
+<td><a href="https://www.sgieurope.com/consumer/padel-set-for-17-annual-growth-through-2027-says-playtomic/115788.article">Playtomic</a></td>
+<td>Réservation de terrains de padel</td>
+<td>Les autres sports, les clubs associatifs</td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Strava">Strava</a></td>
+<td>Réseau social de l'endurance individuelle</td>
+<td>Les sports collectifs et de raquette, la vie de club locale</td>
+</tr>
+<tr>
+<td>Groupes WhatsApp et Facebook</td>
+<td>Gratuits, déjà installés</td>
+<td>La découverte : impossible de trouver un groupe qu'on ne connaît pas</td>
+</tr>
+</tbody>
+</table>
+<p>L'espace libre est la couche publique et locale : voir ce qui se joue autour de soi et s'y joindre, quel que soit le sport. Plusieurs apps de recherche de partenaires ont échoué faute de densité : la carte doit être remplie par les clubs avant d'ouvrir aux joueurs.</p>
+<h2>Produit</h2>
+<p>Cinq onglets : Matchs, Jouer, Créer, Kop (le fil) et Moi. Chaque action clé se fait en trois gestes au plus.</p>
+<table>
+<thead>
+<tr>
+<th>Fonctionnalité</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carte « ce soir, ce week-end »</td>
+<td>Matchs, tournois et initiations autour de soi, scores en direct</td>
+</tr>
+<tr>
+<td>« Il manque un joueur »</td>
+<td>Annonce envoyée aux joueurs du bon niveau dans un rayon de quelques kilomètres</td>
+</tr>
+<tr>
+<td>Partenaires d'entraînement</td>
+<td>Footing, vélo, renforcement : on propose un créneau, d'autres le rejoignent</td>
+</tr>
+<tr>
+<td>Page club</td>
+<td>Carte du club, actualités, classement, recrutement, partenaires locaux</td>
+</tr>
+<tr>
+<td>Carte joueur évolutive</td>
+<td>Du bronze aux cartes spéciales, notes votées par les coéquipiers, propre à chaque profil</td>
+</tr>
+<tr>
+<td>Paris en kops et chambrage</td>
+<td>Monnaie fictive, défis entre amis, piques choisies dans une liste</td>
+</tr>
+<tr>
+<td>Vote du joueur du match</td>
+<td>Par QR code, sans compte : fait entrer parents et amis</td>
+</tr>
+<tr>
+<td>Trophées et passeport sport</td>
+<td>Récompensent l'assiduité et la découverte de nouveaux sports</td>
+</tr>
+</tbody>
+</table>
+<h2>Modèle économique</h2>
+<p>L'app est gratuite. Voir, jouer et publier le restent : c'est ce qui remplit la carte.</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Qui paie</th>
+<th>Prix proposé</th>
+<th>Ce qui est vendu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kopain+</td>
+<td>Pratiquants assidus</td>
+<td>4,99 € par mois ou 34,99 € par an</td>
+<td>Alertes prioritaires, filtres par niveau, statistiques, tag sur la carte joueur</td>
+</tr>
+<tr>
+<td>Club Pro</td>
+<td>Clubs structurés</td>
+<td>19 € par mois ou 190 € par an</td>
+<td>Mise en avant, outils de recrutement, statistiques d'audience, espaces sponsors</td>
+</tr>
+<tr>
+<td>Commission</td>
+<td>Participants</td>
+<td>5 % du montant</td>
+<td>Inscriptions aux tournois et stages, billetterie, cagnottes</td>
+</tr>
+<tr>
+<td>Sponsoring local</td>
+<td>Commerces et marques</td>
+<td>Du forfait local au partenariat national</td>
+<td>« Match présenté par », défis sponsorisés</td>
+</tr>
+</tbody>
+</table>
+<p>L'abonnement n'achète jamais une meilleure note ou un palier de carte : une carte qui s'achète perd sa valeur aux yeux des autres joueurs.</p>
+<h2>Projections sur 3 ans</h2>
+<p>Scénario de travail : toutes les valeurs sont des hypothèses, à tester sur le terrain.</p>
+<table>
+<thead>
+<tr>
+<th>Hypothèse</th>
+<th>Année 1</th>
+<th>Année 2</th>
+<th>Année 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Périmètre</td>
+<td>Paris nord-ouest, 2 sports</td>
+<td>5 métropoles, 5 sports</td>
+<td>France, 8 sports</td>
+</tr>
+<tr>
+<td>Utilisateurs actifs mensuels, moyenne de l'année</td>
+<td>12 500</td>
+<td>87 500</td>
+<td>375 000</td>
+</tr>
+<tr>
+<td>Part d'abonnés Kopain+ (30 € nets par an)</td>
+<td>1,5 %</td>
+<td>2,5 %</td>
+<td>3 %</td>
+</tr>
+<tr>
+<td>Clubs actifs, moyenne de l'année</td>
+<td>150</td>
+<td>1 400</td>
+<td>5 250</td>
+</tr>
+<tr>
+<td>Part de clubs en Club Pro (190 € par an)</td>
+<td>10 %</td>
+<td>12 %</td>
+<td>15 %</td>
+</tr>
+<tr>
+<td>Paiements par utilisateur actif et par an</td>
+<td>6 €</td>
+<td>10 €</td>
+<td>14 €</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>En euros</th>
+<th>Année 1</th>
+<th>Année 2</th>
+<th>Année 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kopain+</td>
+<td>5 625</td>
+<td>65 625</td>
+<td>337 500</td>
+</tr>
+<tr>
+<td>Club Pro</td>
+<td>2 850</td>
+<td>31 920</td>
+<td>149 625</td>
+</tr>
+<tr>
+<td>Commissions (5 %)</td>
+<td>3 750</td>
+<td>43 750</td>
+<td>262 500</td>
+</tr>
+<tr>
+<td>Sponsoring local</td>
+<td>10 000</td>
+<td>120 000</td>
+<td>500 000</td>
+</tr>
+<tr>
+<td><strong>Revenus</strong></td>
+<td><strong>22 225</strong></td>
+<td><strong>261 295</strong></td>
+<td><strong>1 249 625</strong></td>
+</tr>
+<tr>
+<td>Coûts (équipe, technique, marketing)</td>
+<td>250 000</td>
+<td>900 000</td>
+<td>2 200 000</td>
+</tr>
+<tr>
+<td><strong>Résultat</strong></td>
+<td><strong>−227 775</strong></td>
+<td><strong>−638 705</strong></td>
+<td><strong>−950 375</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Le besoin de financement est d'environ 2 M€ sur trois ans. La variable décisive est la rétention : sous 30 % de retour à un mois, aucune ligne de ce tableau ne tient.</p>
+<h2>Plan de lancement</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Période</th>
+<th>Périmètre</th>
+<th>Critère pour passer à la suivante</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0. Validation sans code</td>
+<td>Mois 0 à 3</td>
+<td>Communauté WhatsApp et Instagram, page d'attente, entretiens</td>
+<td>300 inscrits, 10 clubs prêts à publier</td>
+</tr>
+<tr>
+<td>1. Pilote</td>
+<td>Mois 3 à 9</td>
+<td>Paris 17e et 18e, Levallois, Clichy ; basket et football</td>
+<td>5 000 utilisateurs actifs, 50 clubs, 30 % de retour à un mois</td>
+</tr>
+<tr>
+<td>2. Île-de-France et une deuxième ville</td>
+<td>Mois 9 à 18</td>
+<td>Ajout du padel, du handball et de la course</td>
+<td>60 % des annonces « joueur manquant » pourvues</td>
+</tr>
+<tr>
+<td>3. National</td>
+<td>Mois 18 à 36</td>
+<td>8 sports, partenariats avec des comités départementaux</td>
+<td>Plus de 100 000 € de revenus récurrents par mois</td>
+</tr>
+</tbody>
+</table>
+<h2>Moteur de viralité</h2>
+<p>La viralité de Strava est construite dans le produit : chaque usage normal expose l'app à une nouvelle personne. Kopain transpose ce mécanisme au match.</p>
+<ol>
+<li><strong>Défi entre amis</strong> : on mise des kops sur un match et on envoie le défi par message ; pour le relever, il faut ouvrir l'app.</li>
+<li><strong>Chambrage partagé</strong> : la pique part en image dans le groupe du club adverse.</li>
+<li><strong>Carte de résultat automatique</strong> : à la fin du match, chaque joueur reçoit sa story prête à publier, avec sa propre performance.</li>
+<li><strong>Vote sans compte</strong> : les spectateurs votent par QR code, puis reçoivent le résultat et l'invitation.</li>
+<li><strong>Invitation d'équipe</strong> : un lien pour tout le vestiaire, un bonus de kops quand l'équipe est complète.</li>
+<li><strong>Résumé du week-end</strong> : un rendez-vous fixe le dimanche soir, à partager.</li>
+</ol>
+<p>Cibles pour le pilote : coefficient viral supérieur à 0,5, moins d'une minute avant le premier match vu, un résultat sur trois partagé hors de l'app.</p>
+<h2>Acquisition</h2>
+<ul>
+<li><strong>Stores (ASO)</strong> : titre « Kopain : sport amateur près de toi », mots-clés d'intention (partenaire padel, joueur manquant, match amateur).</li>
+<li><strong>Référencement naturel</strong> : une page web publique par club, par match et par annonce, avec données structurées d'événement sportif.</li>
+<li><strong>Publicité</strong> : requêtes d'intention forte et ciblage local à 5 km des clubs partenaires, plafonnée tant que la rétention n'est pas prouvée.</li>
+<li><strong>Relais</strong> : capitaines ambassadeurs, comités départementaux, mairies.</li>
+</ul>
+<h2>Risques</h2>
+<table>
+<thead>
+<tr>
+<th>Risque</th>
+<th>Parade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Démarrage à froid</td>
+<td>Remplir la carte avec les clubs avant d'ouvrir au public, rester sur une petite zone</td>
+</tr>
+<tr>
+<td>Accès aux calendriers des fédérations</td>
+<td>Saisie par les clubs aidée par l'IA, accord avec un comité, avis juridique</td>
+</tr>
+<tr>
+<td>Dérapages du chambrage, présence de mineurs</td>
+<td>Piques prédéfinies sans texte libre, signalement en un geste, comptes mineurs restreints</td>
+</tr>
+<tr>
+<td>Paris requalifiés en jeux d'argent</td>
+<td>Kops jamais achetables ni convertibles en argent ou en lots, validation juridique avant lancement</td>
+</tr>
+<tr>
+<td>Sécurité des rencontres entre inconnus</td>
+<td>Profils vérifiés, score de fiabilité, rendez-vous dans des lieux sportifs publics</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Les chiffres de marché proviennent des sources citées. Les prix, projections et objectifs sont des hypothèses de travail. Clubs, joueurs et scores du prototype sont fictifs.</p>
+</main>
+</body>
+</html>
